@@ -4,8 +4,10 @@ import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -21,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        readContacts();
 
         contactsView = (ListView) findViewById(R.id.contacts_view);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, contactsList);
         contactsView.setAdapter(adapter);
-        readContacts();
     }
 
     private void readContacts() {
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             while (cursor.moveToNext()) {
                 String displayName = cursor.getString(cursor.getColumnIndex(
                         ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                Toast.makeText(this, displayName, Toast.LENGTH_LONG).show();
 
                 String number = cursor.getString(cursor.getColumnIndex(
                         ContactsContract.CommonDataKinds.Phone.NUMBER));

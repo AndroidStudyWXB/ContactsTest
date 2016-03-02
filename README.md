@@ -1,0 +1,1 @@
+the first line code for android study, this project is a demo to read contacts_list. share data between process.
